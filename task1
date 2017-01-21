@@ -1,0 +1,9 @@
+SELECT ct.display_name as 'Contact display name',ct.organization_name as 'Employer organisation name' ,count(csct.id) as 'Number (count) of cases'
+FROM `civicrm_contact` as ct
+
+left join civicrm_case_contact as csct on ct.id = csct.contact_id 
+left join civicrm_case cs on cs.id = csct.case_id
+
+WHERE ct.contact_type = 'Individual' and cs.status_id=1
+
+GROUP by ct.display_name,ct.organization_name
